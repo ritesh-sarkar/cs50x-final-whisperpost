@@ -88,7 +88,7 @@ const LinkPart = () => {
         />
         <button
           onClick={() => {
-            navigator.clipboard.writeText(anonyLink).then(() => {
+            navigator.clipboard.writeText(dynamicLink).then(() => {
               toast.success("Copied to clipboard");
             });
           }}

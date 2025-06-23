@@ -4,6 +4,7 @@ import { Poppins, Inter } from "next/font/google";
 import ConditionalMainHeader from "@/app/components/ConditionalMainHeader";
 import ConditionalFooter from "@/app/components/ConditionalFooter";
 import { Authprovider } from "@/lib/Authprovider";
+import { Analytics } from "@vercel/analytics/next"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -79,6 +80,7 @@ export default function RootLayout({ children }) {
         <Authprovider>
           <ConditionalMainHeader />
           {children}
+          <Analytics />
           <ConditionalFooter />
         </Authprovider>
       </body>

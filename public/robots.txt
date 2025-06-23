@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://whisper-post.vercel.app
+
+# Sitemaps
+Sitemap: https://whisper-post.vercel.app/sitemap.xml

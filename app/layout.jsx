@@ -43,7 +43,7 @@ export const metadata = {
     siteName: "WhisperPost",
     images: [
       {
-        url: "/og.png",
+        url: "/og.webp",
         width: 1200,
         height: 630,
         alt: "WhisperPost Open Graph Image",
@@ -57,7 +57,7 @@ export const metadata = {
     title: "WhisperPost | Send Anonymous Messages",
     description:
       "Receive anonymous feedback from anyone. Simple, private, and easy to use.",
-    images: ["/og.png"],
+    images: ["/og.webp"],
     creator: "Ritesh Sarkar",
   },
   viewport: {

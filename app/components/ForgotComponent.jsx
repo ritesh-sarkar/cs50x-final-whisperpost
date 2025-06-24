@@ -5,9 +5,12 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import LoaderComponent from "@/app/components/LoaderComponent";
+
 
 const ForgotComponent = () => {
   const [state, setState] = useState("email-state");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -18,18 +21,21 @@ const ForgotComponent = () => {
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     if (!email) return toast.error("Email is required");
-
+    setLoading(true);
     try {
       const res = await axios.post("/api/send-otp", { email });
       toast.success(res.data.message);
       setState("OTP-state");
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
+    }finally{
+      setLoading(false);
     }
   };
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (otp.length !== 6) return toast.error("Invalid OTP");
 
     try {
@@ -41,11 +47,14 @@ const ForgotComponent = () => {
       setState("password-state");
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
+    }finally{
+      setLoading(false);
     }
   };
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (password !== confirmPassword)
       return toast.error("Passwords do not match");
 
@@ -62,8 +71,14 @@ const ForgotComponent = () => {
       router.push("/login");
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
+    }finally{
+      setLoading(false);
     }
   };
+
+  if (loading && state === "email-state") return <LoaderComponent state={"Sending OTP"} />;
+  if (loading && state === "OTP-state") return <LoaderComponent state={"Verifying OTP"} />;
+  if (loading && state === "password-state") return <LoaderComponent state={"Resetting Password"} />;
 
   return (
     <div

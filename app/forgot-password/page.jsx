@@ -4,9 +4,9 @@ const forgetPage = () => {
   return (
     <div
       className="
-     w-full
+    w-full
     h-full
-    bg-gray-50
+  bg-gray-100
     flex
     justify-center
     items-center

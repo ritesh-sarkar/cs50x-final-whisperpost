@@ -5,13 +5,16 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import LoaderComponent from "@/app/components/LoaderComponent";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
       const loginRequest = await signIn("credentials", {
         email,
@@ -29,8 +32,12 @@ const Login = () => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) return <LoaderComponent state={"Loging in"} />;
 
   return (
     <div

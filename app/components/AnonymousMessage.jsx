@@ -5,9 +5,11 @@ import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { MessageValidationZod } from "@/lib/MessageValidationZod";
 import axios from "axios";
+import LoaderComponent from "@/app/components/LoaderComponent";
 
 const AnonymousMessage = () => {
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const { username } = useParams();
 
   const handleMessageSubmit = async (e) => {
@@ -20,14 +22,20 @@ const AnonymousMessage = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const res = await axios.post("/api/messages/" + username, { message });
       toast.success(res.data.message);
       setMessage("");
     } catch (error) {
       toast.error(error.response?.data?.error || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) return <LoaderComponent state={"Sending message"} />;
 
   return (
     <div

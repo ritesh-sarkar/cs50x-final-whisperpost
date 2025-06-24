@@ -4,13 +4,16 @@ import { useRouter, useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import axios from "axios";
+import LoaderComponent from "@/app/components/LoaderComponent";
 
 const VerifyAccount = () => {
   const router = useRouter();
   const { token } = useParams();
   const [verificationToken, setVerificationToken] = useState(token);
+  const [loading, setLoading] = useState(false);
 
   const handleVerification = async () => {
+    setLoading(true);
     try {
       const res = await axios.post("/api/verify", {
         token: verificationToken,
@@ -23,8 +26,11 @@ const VerifyAccount = () => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+  if (loading) return <LoaderComponent state={"Verifying account"} />;
 
   return (
     <div

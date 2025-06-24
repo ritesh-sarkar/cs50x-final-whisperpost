@@ -5,6 +5,7 @@ import { useState } from "react";
 import { SignUpValidationZod } from "@/lib/SignUpValidationZod";
 import toast from "react-hot-toast";
 import axios from "axios";
+import LoaderComponent from "@/app/components/LoaderComponent";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [verifyBanner, setVerifyBanner] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,6 +25,7 @@ const SignUp = () => {
       email,
       password,
     });
+
     const failedData = {};
 
     if (!result.success) {
@@ -31,14 +34,11 @@ const SignUp = () => {
       });
 
       toast.error("Invalid form submission!");
-
       setError(failedData);
-      setName(name);
-      setUsername(username);
-      setEmail(email);
-      setPassword(password);
       return;
     }
+
+    setLoading(true);
 
     try {
       const res = await axios.post("/api/signup", {
@@ -54,6 +54,8 @@ const SignUp = () => {
       }
     } catch (error) {
       toast.error(error.response.data.error);
+    } finally {
+      setLoading(false);
     }
 
     setError("");
@@ -62,6 +64,8 @@ const SignUp = () => {
     setEmail("");
     setPassword("");
   };
+
+  if (loading) return <LoaderComponent state={"Creating your account"} />;
 
   return (
     <div

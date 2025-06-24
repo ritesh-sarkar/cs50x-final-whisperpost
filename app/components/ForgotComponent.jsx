@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const ForgotComponent = () => {
   const [state, setState] = useState("email-state");
@@ -14,27 +15,54 @@ const ForgotComponent = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleEmailSubmit = (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
-    toast.success("Email sent successfully");
-    setState("OTP-state");
+    if (!email) return toast.error("Email is required");
+
+    try {
+      const res = await axios.post("/api/send-otp", { email });
+      toast.success(res.data.message);
+      setState("OTP-state");
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
   };
 
-  const handleOtpSubmit = (e) => {
+  const handleOtpSubmit = async (e) => {
     e.preventDefault();
     if (otp.length !== 6) return toast.error("Invalid OTP");
-    console.log(otp);
-    toast.success("OTP verified successfully");
-    setState("password-state");
+
+    try {
+      const res = await axios.post("/api/varify-otp", {
+        email,
+        otpFromUser: otp,
+      });
+      toast.success(res.data.message);
+      setState("password-state");
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
   };
 
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) return toast.error("Passwords do not match");
-    console.log(password);
-    toast.success("Password changed successfully");
-    router.push("/login");
+    if (password !== confirmPassword)
+      return toast.error("Passwords do not match");
+
+    if (password.length < 6) {
+      return toast.error("Password must be at least 6 characters long");
+    }
+
+    try {
+      const res = await axios.post("/api/reset-password", {
+        email,
+        newPassword: password,
+      });
+      toast.success(res.data.message);
+      router.push("/login");
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
   };
 
   return (

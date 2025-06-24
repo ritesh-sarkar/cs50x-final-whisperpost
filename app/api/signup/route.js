@@ -55,7 +55,7 @@ export async function POST(req) {
     );
 
     const mailOption = {
-      from: 'no-reply@whisperpost.com',
+      from: "developerriteshsarkar@gmail.com",
       to: user.email,
       subject: "WhisperPost| Verify Your Email",
       html: `
@@ -66,9 +66,8 @@ export async function POST(req) {
     };
 
     const transport = nodemailer.createTransport({
-      service: "gmail",
-      port: 465,
-      secure: true,
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT),
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD,

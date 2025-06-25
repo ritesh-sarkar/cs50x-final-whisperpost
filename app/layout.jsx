@@ -5,7 +5,7 @@ import ConditionalMainHeader from "@/app/components/ConditionalMainHeader";
 import ConditionalFooter from "@/app/components/ConditionalFooter";
 import { Authprovider } from "@/lib/Authprovider";
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -68,6 +68,9 @@ export const metadata = {
   },
   icons: {
     icon: "/favicon.ico",
+  },
+  other: {
+    "google-site-verification": "h0l0uTNeF1BayotC41QD2O8u_YxbLgnlc40D6QdTX2o",
   },
 };
 

@@ -7,8 +7,8 @@ import { useSession } from "next-auth/react";
 
 const Messages = ({ messages, setMessages, loadMessages }) => {
   const [deleting, setDeleting] = useState(null);
+  const [selectedMessage, setSelectedMessage] = useState(null);
   const { data: session } = useSession();
-  const userID = session?.user?.id;
 
   const getTimeAgo = (createdAt) => {
     const now = new Date();
@@ -78,15 +78,22 @@ const Messages = ({ messages, setMessages, loadMessages }) => {
     }
   };
 
+  const closeModal = () => {
+    setSelectedMessage(null);
+  };
+
   return (
-    <div>
+    <div className="relative">
       {messages.map((msg) => {
         const isBeingDeleted = deleting === msg.id;
 
         return (
           <div
             key={msg.id}
-            onClick={() => toggleIsNew(msg.id)}
+            onClick={() => {
+              toggleIsNew(msg.id);
+              setSelectedMessage(msg);
+            }}
             className={clsx(
               `
               w-full
@@ -100,6 +107,8 @@ const Messages = ({ messages, setMessages, loadMessages }) => {
               transition
               duration-300
               ease-in-out
+              relative
+              cursor-pointer
               `,
               msg.isNew && "newMessage",
               isBeingDeleted &&
@@ -214,6 +223,78 @@ const Messages = ({ messages, setMessages, loadMessages }) => {
           </div>
         );
       })}
+
+
+      {selectedMessage && (
+        <div
+          className="
+            fixed 
+            inset-0 
+            bg-black/40 
+            backdrop-blur-sm 
+            z-50 
+            flex 
+            items-center 
+            justify-center
+          "
+          onClick={closeModal}
+        >
+          <div
+            className="
+              bg-white 
+              rounded-lg 
+              shadow-lg 
+              p-6 
+              max-w-md 
+              w-[90%] 
+              relative
+              text-gray-800
+              font-poppins
+            "
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="
+                absolute 
+                top-2 
+                right-2 
+                text-gray-500 
+                hover:text-gray-700
+                transition-all 
+                duration-300
+                ease-in-out
+              "
+              onClick={closeModal}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="
+                size-6
+                active:scale-90
+                "
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            <h3 className="font-bold text-lg mb-3">Anonymous</h3>
+            <p className="text-gray-700 whitespace-pre-line">
+              {selectedMessage.message}
+            </p>
+            <p className="text-sm text-gray-500 mt-4">
+              {getTimeAgo(selectedMessage.createdAt)}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

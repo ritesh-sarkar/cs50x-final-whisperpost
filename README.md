@@ -5,7 +5,7 @@
 > edX Username: `ritesh_468`
 > GitHub Username: [`ritesh-sarkar`](https://github.com/ritesh-sarkar)
 > Location: Chandpur, Chattogram, Bangladesh
-> Submitted on: July 30, 2025
+> Submitted on: July 31, 2025
 
 ---
 

@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# WhisperPost 💬 — Anonymous Messaging Web App
 
-## Getting Started
+> Final Project for **CS50x 2024**
+>
+> Developed by: **Ritesh Sarkar Showharda**  
+> edX Username: `ritesh_468`  
+> GitHub Username: [`ritesh-sarkar`](https://github.com/ritesh-sarkar)  
+> Location: Chandpur, Chattogram, Bangladesh  
+> Submitted on: July 30, 2025
 
-First, run the development server:
+---
+
+## 📽️ Project Video Demo
+
+Watch the full project explanation video on YouTube:  
+[https://youtu.be/NkarbV5lBfY](https://youtu.be/NkarbV5lBfY)
+
+---
+
+## 🧠 About the Project
+
+**WhisperPost** is a full-stack **anonymous messaging platform** where users can:
+
+- Create an account with secure email verification
+- Receive anonymous messages via a unique dashboard
+- React to messages with a heart ❤️
+- Take screenshots of messages
+- Delete messages if unwanted
+
+It focuses on **privacy**, **simplicity**, and an **intuitive UI**, following modern web development practices.
+
+---
+
+## 🔧 Technologies Used
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: Tailwind CSS
+- **Database**: MongoDB (with Mongoose)
+- **Authentication**: Custom credentials-based system with email verification
+- **Frontend Animations**: Framer Motion
+
+---
+
+## ✨ Features
+
+- ✅ **User Registration with Email Verification**
+- ✅ **Form validation** with Zod and Regex
+- ✅ **Custom Dashboard** with real-time anonymous message feed
+- ✅ **Read, Love, Screenshot, Delete** functionalities for messages
+- ✅ **Responsive Design** for all devices
+- ✅ **Secure JWT-based auth via HTTP-only cookies**
+- ✅ **Forgot Password**
+
+---
+
+## 🖼️ Screenshots (See video for live demo)
+
+- Signup and login interface
+- Secure email verification system
+- Personalized user dashboard
+- Anonymous message display with interaction options
+
+---
+
+## 🚀 How to Run Locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ritesh-sarkar/whisperpost.git
+cd whisperpost
+npm install
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

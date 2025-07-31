@@ -35,7 +35,6 @@ It focuses on **privacy**, **simplicity**, and an **intuitive UI**, following mo
 - **Styling**: Tailwind CSS
 - **Database**: MongoDB (with Mongoose)
 - **Authentication**: Custom credentials-based system with email verification
-- **Frontend Animations**: Framer Motion
 
 ---
 
@@ -52,14 +51,14 @@ It focuses on **privacy**, **simplicity**, and an **intuitive UI**, following mo
 ---
 
 ## 📁 Folder Structure
-
+```
 /app          # Next.js App Router files and pages
 /app/components   # React components used across the app
 /lib          # Utilities and helper functions (e.g., database connection, auth helpers)
 /models       # Mongoose models and schemas
 /pages/api    # API routes for authentication, messages, etc.
 /public       # Public assets like robots.txt, sitemap.xml, images
-
+```
 
 ---
 
@@ -76,14 +75,14 @@ It focuses on **privacy**, **simplicity**, and an **intuitive UI**, following mo
 
 1.  Clone the repository:
     ```bash
-    git clone [https://github.com/ritesh-sarkar/whisperpost.git](https://github.com/ritesh-sarkar/whisperpost.git)
+    git clone https://github.com/ritesh-sarkar/cs50x-final-whisperpost
     cd whisperpost
     ```
 2.  Install dependencies:
     ```bash
     npm install
     ```
-3.  Create a `.env` file in the root directory and add your environment variables (see `.env.example`):
+3.  Create a `.env.local` file in the root directory and add your environment variables (see `.env.example`):
     ```env
     DB_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret
@@ -95,7 +94,7 @@ It focuses on **privacy**, **simplicity**, and an **intuitive UI**, following mo
     SMTP_USER=your_smtp_user
     SMTP_PASSWORD=your_smtp_password
     ```
-    **Important**: Never commit your `.env` file to public repositories. Keep credentials private.
+    **Important**: Never commit your `.env.local` file to public repositories. Keep credentials private.
 
 4.  Run the development server:
     ```bash
@@ -113,7 +112,7 @@ It focuses on **privacy**, **simplicity**, and an **intuitive UI**, following mo
 
 ## 📬 Contact
 
-For questions or collaboration, please contact me via Facebook or email.
+For questions or collaboration, please contact me via Facebook or Email.
 
 Email: `riteshsarkar2006@gmail.com`
 Facebook: `https://www.facebook.com/riteshsarkar15/`
